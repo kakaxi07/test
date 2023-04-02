@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>方式一</title>
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+    .nav-2-dropdown{
+      display: none;
+    }
+
+    nav>ul:first-child {
+      width: 100%;
+      display: flex;
+    }
+    nav ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav li {
+      width: 100%;
+      line-height: 40px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    @media (max-width: 767px) {
+      .nav-2-dropdown {
+        display: none;
+        background-color: #333;
+        padding: 10px;
+      }
+
+      .nav-2-dropdown.active {
+        display: block;
+      }
+
+      .nav-2 {
+        position: relative;
+        text-align: center;
+      }
+
+      .nav-2-dropdown {
+        top: calc(100% + 10px);
+      }
+      .nav-1,
+      .nav-3 {
+        display: none;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li class="nav-1"><a href="#">导航1</a></li>
+      <li class="nav-2"><a href="#" class="nav2">导航2</a>
+        <div class="nav-2-dropdown">
+          <ul>
+            <li><a href="#" onmouseover="show('列表1')">列表1</a></li>
+            <li><a href="#" onmouseover="show('列表2')">列表2</a></li>
+            <li><a href="#" onmouseover="show('列表3')">列表3</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-3"><a href="#">导航3</a></li>
+    </ul>
+  </nav>
+  <script>
+    var nav2 = document.querySelector('.nav-2');
+    var nav2Dropdown = document.querySelector('.nav-2-dropdown');
+    nav2.addEventListener('click', function () {
+      nav2Dropdown.classList.toggle('active');
+    });
+    function show(a) {
+      document.querySelector('.nav2').innerText= a;
+    }
+  </script>
+</body>
+
+</html>

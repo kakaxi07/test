@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方式二</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            display: none;
+        }
+
+        nav.navbar {
+            color: #fff;
+            background-color: #333;
+            font-size: 28px;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar-item {
+            flex: 1;
+            text-align: center;
+        }
+        .dropdown{
+            display: none;
+        }
+        @media (max-width: 768px) {
+
+            .navbar-item.navbar-left,
+            .navbar-item.navbar-right,
+            .navbar-item.navbar-middle {
+                display: none;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                min-height: 100vh;
+                background: #f9f9f9;
+            }
+
+            .dropdown {
+                display: block;
+                position: relative;
+                width: 300px;
+                height: 50px;
+            }
+
+            .dropdown::before {
+                content: '';
+                position: absolute;
+                top: 25px;
+                right: 28px;
+                width: 12px;
+                height: 2px;
+                background: #555;
+                transform: rotate(40deg);
+                z-index: 10;
+                transition: 0.5s;
+            }
+
+            .dropdown.active::before {
+                right: 20px;
+            }
+
+            .dropdown::after {
+                content: '';
+                position: absolute;
+                top: 25px;
+                right: 20px;
+                width: 12px;
+                height: 2px;
+                background: #555;
+                transform: rotate(-40deg);
+                z-index: 10;
+                transition: 0.5s;
+            }
+            .dropdown.active::after {
+                right: 28px;
+            }
+            .dropdown input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                border: none;
+                border-radius: 10px;
+                padding: 12px 20px;
+                font-size: 16px;
+                background: #fff;
+                text-transform: capitalize;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+                outline: none;
+            }
+
+            .dropdown .option {
+                position: absolute;
+                top: 70px;
+                width: 100%;
+                border-radius: 10px;
+                background: #fff;
+                box-shadow: 0 30px 30px rgba(0, 0, 0, 0.05);
+                overflow: hidden;
+                visibility: hidden;
+                opacity: 0;
+                transition: 0.25s;
+            }
+
+            .dropdown.active .option {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .dropdown .option div {
+                padding: 12px 20px;
+                cursor: pointer;
+            }
+
+            .dropdown .option div:hover {
+                background: #62baea;
+                color: #fff;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-item navbar-left">导航一</div>
+            <div class="navbar-item navbar-middle">导航二</div>
+            <div class="navbar-item navbar-right">导航三</div>
+        </div>
+    </nav>
+    <div class="dropdown">
+        <input type="text" class="text2" readonly placeholder="选择下拉菜单">
+        <div class="option">
+            <div>列表1</div>
+            <div>列表2</div>
+            <div>列表3</div>
+            <div>列表4</div>
+            <div>列表5</div>
+        </div>
+    </div>
+</body>
+<script>
+    var input=document.querySelector('.text2')
+    var list=document.querySelectorAll('.option>div')
+    let dropdown = document.querySelector('.dropdown');
+    dropdown.onclick = function () {
+        dropdown.classList.toggle('active')
+    }
+    for(var i=0;i<list.length;i++){
+        list[i].onmouseover=function(){
+            input.value = this.innerText;
+        }
+    }
+</script>
+
+</html>
